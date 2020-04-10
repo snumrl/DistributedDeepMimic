@@ -29,8 +29,8 @@ static int dof;
 /* Init serise */
 void globalInit()
 {
-//	Eigen::initParallel();
-//	omp_set_num_threads(16);
+	Eigen::initParallel();
+	omp_set_num_threads(16);
 
 	Parameter::loadParameter();
 	baseSkel = DPhy::SkeletonBuilder::BuildFromFile(Parameter::humanoidFile);
@@ -157,7 +157,7 @@ boost::python::tuple multistep_python(np::ndarray idx, np::ndarray npaction){
 	Eigen::VectorXd reward(size);
 	Eigen::VectorXi done(size);
 
-//#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for schedule(dynamic)
 	for(int i = 0; i < size; i++){
 		DefaultEnvironment *agent = envList[id[i]];
 		agent->step(action.row(i), reward[i], done[i]);

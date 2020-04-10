@@ -62,11 +62,11 @@ class AgentInterface():
 			if self.render: env[0].render()
 			#for s in state: std += self.actor.get_std(s)
 			action = self.actor.get_action(torch.stack(state))
-			next_state, reward, done, tl, _ = env[0].multistep(env_list, action)
+			next_state, reward, done, _ = env[0].multistep(env_list, action)
 			steps = steps + len(env_list)
 			for i in range(len(env_list)-1, -1, -1):
-				next_state[i] = self.state_modifier.apply(torch.from_numpy(next_state[i]))
-				if tl[i] == 1: reward[i] += self.critic.get_values(next_state[i])[0] * gamma
+				next_state[i] = self.state_modifier.apply(next_state[i])
+#				if tl[i] == 1: reward[i] += self.critic.get_values(next_state[i])[0] * gamma
 				replay_buffer_tmp[i].append(state[i], action[i], reward[i], done[i] == 1)
 				if done[i] == 1 and steps >= self.steps:
 					replay_buffer.merge(replay_buffer_tmp[i])

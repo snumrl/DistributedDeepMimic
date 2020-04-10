@@ -1,6 +1,7 @@
 import bipedenv.libbiped as lib
 import numpy as np
 import gym
+import torch
 
 def globalRender():
 	lib.globalRender()
@@ -22,6 +23,10 @@ class DefaultEnv(gym.Env):
 
 	def post_action(self):
 		pass
+
+	def multistep(self, env, action):
+		state, reward, done, info = lib.multistep(np.array([e.env for e in env], dtype='i'), action.numpy())
+		return [torch.from_numpy(s) for s in state], reward, done, info
 
 class DeepMimic(DefaultEnv):
 	def __init__(self, env_config):
