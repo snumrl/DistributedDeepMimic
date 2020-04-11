@@ -89,7 +89,7 @@ def train_DReCon(args):
 
 def train_deepmimic(args):
 	env = [DeepMimic({"render" : args.render} if i == 0 else {"render" : False}) for i in range(args.cpu)]
-	agent = PPO_agent_with_param(env, [512, 512, 512], 5e-5, [512, 512], 1e-4, 7e-4, \
+	agent = PPO_agent_with_param(env, [512, 512, 512], 5e-5, [512, 512, 512], 1e-4, 7e-4, \
 		{'gamma':0.97, 'lamda':0.95, 'steps':20480, 'batch_size':1024}, args)
 	if args.load_model is not None: agent.set_ckpt(torch.load(os.path.join(os.getcwd(), args.load_model)))
 	train(agent, args.train, args.cpu, env[0].name, args.name)

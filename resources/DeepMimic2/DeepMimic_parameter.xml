@@ -1,0 +1,33 @@
+<humanoidFile>resources/DeepMimic2/humanoid.xml</humanoidFile>
+
+<!-- SPD -->
+<mKp>500</mKp>
+<mKv>50</mKv>
+
+<!-- frame -->
+<kinematicsFPS>30</kinematicsFPS>
+<physicsFPS>600</physicsFPS>
+
+<!-- kinematics editing -->
+<blendingFrame>20</blendingFrame>
+<motionmatchingOffset>20</motionmatchingOffset>
+
+<!-- foot contact -->
+<footList>FootL FootR</footList>
+<footContactHeight>0.15</footContactHeight>
+<footContactVelocity>1.5</footContactVelocity>
+
+<!-- motion database list -->
+<motionDataFiles>resources/DeepMimic2/run_clip.bvh</motionDataFiles>
+
+<!-- reward components -->
+<interestBodies>Spine Neck Head ForeArmL ArmL HandL ForeArmR ArmR HandR FemurL TibiaL FootL FemurR TibiaR FootR</interestBodies>
+<rewardBodies>Spine Neck Head Torso ForeArmL ArmL HandL ForeArmR ArmR HandR FemurL TibiaL FootL FemurR TibiaR FootR</rewardBodies>
+<endEffectors>HandL HandR FootL FootR Head</endEffectors>
+<head>Head</head>
+
+<!-- envorinment early termination -->
+<rootHeightLowerLimit>0.3</rootHeightLowerLimit>
+<rootHeightUpperLimit>2.0</rootHeightUpperLimit>
+<rootDiffThreshold>1.0</rootDiffThreshold>
+<rootAngleDiffThreshold>1.5</rootAngleDiffThreshold>

@@ -150,6 +150,7 @@ class PPOAgent(AgentInterface):
 
 				old_policy, _ = self.actor.evaluate(states, actions)
 				old_values = self.critic.get_values(states)
+				print(old_policy)
 
 				returns, advants = replay_buffer.get_gae(old_values, self.gamma, self.lamda) # gamma
 			

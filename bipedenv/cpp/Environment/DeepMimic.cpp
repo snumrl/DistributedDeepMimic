@@ -28,7 +28,7 @@ void DeepMimic::reset(){
 
 void DeepMimic::step(const Eigen::VectorXd &action, double &reward, int &done){
 	Eigen::VectorXd clipedAction = Eigen::VectorXd::Zero(actionSize() + 6);
-	clipedAction.segment(6, actionSize()) = (action * 0.1).cwiseMin(PI * 0.7).cwiseMax(-PI * 0.7);
+	clipedAction.segment(6, actionSize()) = (action * 0.2).cwiseMin(PI * 0.7).cwiseMax(-PI * 0.7);
 	Eigen::VectorXd position = kinematics->getPosition() + clipedAction;
 
 	int rep = 1;

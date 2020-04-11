@@ -24,10 +24,10 @@ Eigen::VectorXd PhysicsSPDAgent::getSPDForces(const Eigen::VectorXd &targetPosit
 	Eigen::MatrixXf M = (skel->getMassMatrix() + Eigen::MatrixXd(dt * mKv.asDiagonal())).cast<float>();
 	Eigen::MatrixXd M_inv = M.inverse().cast<double>();
 
-	Eigen::VectorXd p_d = q + dq*dt - targetPosition;
+	Eigen::VectorXd p_d(q.rows()); //q + dq*dt - targetPosition;
 	// clamping radians to [-pi, pi], only for ball joints
 	// TODO : make it for all type joints
-	/*
+	//*
 	p_d.segment<6>(0) = Eigen::VectorXd::Zero(6);
 	for (int i = 6; i < (int)skel->getNumDofs(); i += 3)
 	{
