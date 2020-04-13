@@ -37,20 +37,24 @@ def set_config(args):
 			"fcnet_activation": "relu",
 			"conv_activation": "relu",
 			"fcnet_hiddens": [512, 512, 512],
-#			"custom_action_dist": "my_dist",
 		},
 
+		"use_pytorch": True,
+#		"eager": False,
+#		"eager_tracing": False,
+		
 		# === PPO Settings ===
 		"lambda": 0.95,
-		"kl_coeff": 0.0,
+		"kl_coeff": 0.2,
+    	"kl_target": 0.1,
 #		"rollout_fragment_length": 20480 // args.cpu,
 		"train_batch_size": 20480,
 		"sgd_minibatch_size": 1024,
-		"num_sgd_iter": 1,
-		"clip_param": 0.2,
+		"num_sgd_iter": 20,
+		"clip_param": 0.3,
 		"vf_clip_param": 100.0,
 #		"observation_filter": "MeanStdFilter",
-    	"use_pytorch": True,
+    	"entropy_coeff": 0.00,
 	}
 
 	for name, value in ppo_additional.items():
